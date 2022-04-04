@@ -199,6 +199,7 @@ class _ScreenPrintingOnPosMachineState extends State<ScreenPrintingOnPosMachine>
     List<int> bytes = [];
 
     bytes += ticket.image(await ImageProcessUtils().makeImageForPrint(printImageData!), align: PosAlign.center);
+    ticket.feed(2);
     ticket.cut();
     return bytes;
   }

@@ -68,7 +68,7 @@ class _PrintReceiptScreenState extends State<PrintReceiptScreen>{
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
-        appBar: AppBar(backgroundColor: const Color(0xffc88719),title: const Text("Pos Printer Print Sample"),),
+        appBar: AppBar(backgroundColor: const Color(0xffc88719),title: Text(AppConstants.instance.appbarTitle,style: const TextStyle(fontSize: 16),),),
         body: ValueListenableBuilder(
           valueListenable: _printReceiptScreenData!.isBluetoothOnValue,
           builder: (context, bool bluetoothStatusValue, child) {

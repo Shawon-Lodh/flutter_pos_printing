@@ -71,40 +71,67 @@ class _HomePageScreenState extends State<HomePageScreen>{
                     controller: _homePageScreenData!.screenshotControllerValue!,
                     child: Column(
                       children: [
-                        const SizedBox(height:20),
-
-                        SvgPicture.asset(
-                          'assets/images/grocerry.svg',
-                          color: const Color(0xff424242),
-                          // width: 60,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5),
+                          child: SvgPicture.asset(
+                            'assets/images/grocerry.svg',
+                            color: const Color(0xff424242),
+                            // width: 60,
+                          ),
                         ),
 
+                        const SizedBox(height:5),
+
+                        Text("address",
+                            textAlign: TextAlign.center,
+                            style : GoogleFonts.poppins(
+                              textStyle: const TextStyle(
+                                  fontSize: 12, color: Color(0xff424242)),
+                            )).tr(),
+
+                        Text("phone",
+                            textAlign: TextAlign.center,
+                            style : GoogleFonts.poppins(
+                              textStyle: const TextStyle(
+                                  fontSize: 12, color: Color(0xff424242)),
+                            )).tr(),
+
+                        // Text("email",
+                        //     textAlign: TextAlign.center,
+                        //     style : GoogleFonts.poppins(
+                        //       textStyle: const TextStyle(
+                        //           fontSize: 12, color: Color(0xff424242)),
+                        //     )).tr(),
+
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          padding: const EdgeInsets.symmetric(vertical: 5),
                           child: Text("orderDetails",
-                            style : GoogleFonts.hindSiliguri(
+                            style : GoogleFonts.poppins(
                             textStyle: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xff424242)),
+                                fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff424242)),
                           )).tr(),
                         ),
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Bill No : SR5",
-                                style : GoogleFonts.hindSiliguri(
-                                  textStyle: const TextStyle(
-                                      fontSize: 16, fontWeight: FontWeight.normal, color: Color(0xff424242)),
-                                )).tr(),
-                            Text("Date : 04/04/2022",
-                                style : GoogleFonts.hindSiliguri(
-                                  textStyle: const TextStyle(
-                                      fontSize: 16, fontWeight: FontWeight.normal, color: Color(0xff424242)),
-                                )).tr(),
-                          ],
-                        ),
+                        _getDottedLine(),
 
-                        const SizedBox(height: 5),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("invoice_no",
+                                  style : GoogleFonts.poppins(
+                                    textStyle: const TextStyle(
+                                        fontSize: 12, fontWeight: FontWeight.normal, color: Color(0xff424242)),
+                                  )).tr(),
+                              Text("date",
+                                  style : GoogleFonts.poppins(
+                                    textStyle: const TextStyle(
+                                        fontSize: 12, fontWeight: FontWeight.normal, color: Color(0xff424242)),
+                                  )).tr(),
+                            ],
+                          ),
+                        ),
 
                         _getDottedLine(),
 
@@ -115,25 +142,27 @@ class _HomePageScreenState extends State<HomePageScreen>{
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Expanded(
-                                flex: 3,
-                                child: Column(
-                                  children: [
-                                    Text("Item",
-                                        style : GoogleFonts.hindSiliguri(
-                                          textStyle: const TextStyle(
-                                              fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff424242)),
-                                        )).tr(),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
                                 flex: 1,
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("Qty",
-                                        style : GoogleFonts.hindSiliguri(
+                                    Text("#",
+                                        style : GoogleFonts.poppins(
                                           textStyle: const TextStyle(
-                                              fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff424242)),
+                                              fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xff424242)),
+                                        )).tr(),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("item",
+                                        style : GoogleFonts.poppins(
+                                          textStyle: const TextStyle(
+                                              fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xff424242)),
                                         )).tr(),
                                   ],
                                 ),
@@ -142,10 +171,10 @@ class _HomePageScreenState extends State<HomePageScreen>{
                                 flex: 2,
                                 child: Column(
                                   children: [
-                                    Text("Price",
-                                        style : GoogleFonts.hindSiliguri(
+                                    Text("quantity",
+                                        style : GoogleFonts.poppins(
                                           textStyle: const TextStyle(
-                                              fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff424242)),
+                                              fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xff424242)),
                                         )).tr(),
                                   ],
                                 ),
@@ -154,10 +183,24 @@ class _HomePageScreenState extends State<HomePageScreen>{
                                 flex: 2,
                                 child: Column(
                                   children: [
-                                    Text("Amount",
-                                        style : GoogleFonts.hindSiliguri(
+                                    Text("unit_list_price",
+                                        textAlign: TextAlign.center,
+                                        style : GoogleFonts.poppins(
                                           textStyle: const TextStyle(
-                                              fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff424242)),
+                                              fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xff424242)),
+                                        )).tr(),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Column(
+                                  children: [
+                                    Text("sale_price",
+                                        textAlign: TextAlign.center,
+                                        style : GoogleFonts.poppins(
+                                          textStyle: const TextStyle(
+                                              fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xff424242)),
                                         )).tr(),
                                   ],
                                 ),
@@ -166,6 +209,144 @@ class _HomePageScreenState extends State<HomePageScreen>{
                           ),
                         ),
 
+                        _getDottedLine(),
+
+                        _getGroceryItemDetails(itemNo: "serial1", itemName: "item_name1", quantity: "quantity_amount1", price: "unit_list_price1", amount: "sale_price1"),
+
+                        const SizedBox(height: 5),
+
+                        _getGroceryItemDetails(itemNo: "serial2",itemName: "item_name2", quantity: "quantity_amount2", price: "unit_list_price2", amount: "sale_price2"),
+
+                        const SizedBox(height: 5),
+
+                        _getGroceryItemDetails(itemNo: "serial3",itemName: "item_name3", quantity: "quantity_amount1", price: "unit_list_price3", amount: "sale_price3"),
+
+                        const SizedBox(height: 5),
+
+                        _getDottedLine(),
+
+                        const SizedBox(height: 5),
+
+                        _getQuantityAndPriceDetails(title: "items_count",amount: "items_count_quantity"),
+
+                        const SizedBox(height: 5),
+
+                        _getQuantityAndPriceDetails(title: "total_quantity",amount: "total_quantity_amount"),
+
+                        const SizedBox(height: 5),
+
+                        _getDottedLine(),
+
+                        const SizedBox(height: 5),
+
+                        _getQuantityAndPriceDetails(title: "discount",amount: "discount_amount"),
+
+                        const SizedBox(height: 5),
+
+                        _getQuantityAndPriceDetails(title: "subtotal",amount: "subtotal_amount"),
+
+                        const SizedBox(height: 5),
+
+                        _getQuantityAndPriceDetails(title: "tax",amount: "tax_amount"),
+
+                        const SizedBox(height: 5),
+
+                        _getDottedLine(),
+
+                        const SizedBox(height: 5),
+
+                        _getQuantityAndPriceDetails(title: "total",amount: "total_amount"),
+
+                        const SizedBox(height: 5),
+
+                        _getQuantityAndPriceDetails(title: "round",amount: "round_amount"),
+
+                        const SizedBox(height: 5),
+
+                        _getDottedLine(),
+
+                        const SizedBox(height: 5),
+
+                        _getQuantityAndPriceDetails(title: "paid",amount: "paid_amount"),
+
+                        const SizedBox(height: 5),
+
+                        _getQuantityAndPriceDetails(title: "change",amount: "change_amount"),
+
+                        const SizedBox(height: 5),
+
+                        _getDottedLine(),
+
+                        const SizedBox(height: 5),
+
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 10),
+                                child: Text("amount_in_words",
+                                    style : GoogleFonts.poppins(
+                                      textStyle: const TextStyle(
+                                          fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xff424242)),
+                                    )).tr(),
+                              ),
+
+                              FittedBox(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                                  child: Text("amount_in_words_value",
+                                      textAlign: TextAlign.right,
+                                      style : GoogleFonts.poppins(
+                                        textStyle: const TextStyle(
+                                            fontSize: 12, color: Color(0xff424242)),
+                                      )).tr(),
+                                ),
+                              ),
+
+                              const SizedBox(height: 5),
+                            ],
+                          ),
+                        ),
+
+                        _getDottedLine(),
+
+                        const SizedBox(height: 5),
+
+                        Text("suggestion",
+                            textAlign: TextAlign.center,
+                            style : GoogleFonts.poppins(
+                              textStyle: const TextStyle(
+                                  fontSize: 12, color: Color(0xff424242)),
+                            )).tr(),
+
+                        const SizedBox(height: 5),
+
+                        _getDottedLine(),
+                        _getDottedLine(),
+                        const SizedBox(height: 2),
+                        _getDottedLine(),
+                        _getDottedLine(),
+                        const SizedBox(height: 5),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            _getOnlySingleDottedLine(),
+                            Text("thanks",
+                                textAlign: TextAlign.center,
+                                style : GoogleFonts.poppins(
+                                  textStyle: const TextStyle(
+                                      fontSize: 12, color: Color(0xff424242)),
+                                )).tr(),
+                            _getOnlySingleDottedLine(),
+                          ],
+                        ),
+                        const SizedBox(height: 5),
+                        _getDottedLine(),
+                        _getDottedLine(),
+                        const SizedBox(height: 2),
+                        _getDottedLine(),
                         _getDottedLine(),
 
                       ],
@@ -178,6 +359,34 @@ class _HomePageScreenState extends State<HomePageScreen>{
           ),
         ),
       ),
+    );
+  }
+
+  Column _getOnlySingleDottedLine() {
+    return Column(
+      children: const [
+        Dash(
+            direction: Axis.horizontal,
+            length: 5,
+            dashLength: 5,
+            dashColor: Color(0xff424242)),
+        Dash(
+            direction: Axis.horizontal,
+            length: 5,
+            dashLength: 5,
+            dashColor: Color(0xff424242)),
+        SizedBox(height: 2),
+        Dash(
+            direction: Axis.horizontal,
+            length: 5,
+            dashLength: 5,
+            dashColor: Color(0xff424242)),
+        Dash(
+            direction: Axis.horizontal,
+            length: 5,
+            dashLength: 5,
+            dashColor: Color(0xff424242)),
+      ],
     );
   }
 
@@ -195,6 +404,114 @@ class _HomePageScreenState extends State<HomePageScreen>{
     );
   }
 
+  Widget _getGroceryItemDetails({String? itemNo, String? itemName, String? quantity, String? price, String? amount}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Expanded(
+          flex: 1,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(itemNo!,
+                  style : GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                        fontSize: 12,fontWeight: FontWeight.w600, color: Color(0xff424242)),
+                  )).tr(),
+            ],
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(itemName!,
+                  style : GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                        fontSize: 12, color: Color(0xff424242)),
+                  )).tr(),
+            ],
+          ),
+        ),
+        Expanded(
+          flex: 2,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(quantity!,
+                  style : GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                        fontSize: 12, color: Color(0xff424242)),
+                  )).tr(),
+            ],
+          ),
+        ),
+        Expanded(
+          flex: 2,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(price!,
+                  style : GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                        fontSize: 12, color: Color(0xff424242)),
+                  )).tr(),
+            ],
+          ),
+        ),
+        Expanded(
+          flex: 2,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(amount!,
+                  style : GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                        fontSize: 12, color: Color(0xff424242)),
+                  )).tr(),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _getQuantityAndPriceDetails({String? title, String? amount}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Expanded(
+          flex: 7,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(title!,
+                  style : GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                        fontSize: 14,fontWeight: FontWeight.bold, color: Color(0xff424242)),
+                  )).tr(),
+            ],
+          ),
+        ),
+        Expanded(
+          flex: 2,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(amount!,
+                  style : GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                        fontSize: 14, color: Color(0xff424242)),
+                  )).tr(),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
 
   /// UI
   Widget _getCreateReceiptButton() {
@@ -211,7 +528,7 @@ class _HomePageScreenState extends State<HomePageScreen>{
       child: Text(
         AppConstants.instance.printReceipt,
         style: const TextStyle(
-          fontSize: 18,
+          fontSize: 16,
           fontFamily: 'Raleway',
           fontWeight: FontWeight.bold,
           color: Color(0xffc88719),
