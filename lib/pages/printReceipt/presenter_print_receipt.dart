@@ -32,7 +32,8 @@ class PrintReceiptScreenPresenter {
     _printReceiptScreenData.isLocationOnValue.value = await gpsCheck();
     if (_printReceiptScreenData.isBluetoothOnValue.value &&
         _printReceiptScreenData.isLocationOnValue.value) {
-      startScanBluetoothDevices();
+      // startScanBluetoothDevices();
+      listenBluetoothDevices();
     }
   }
 
@@ -107,20 +108,11 @@ class PrintReceiptScreenPresenter {
         .listen((devices) async {
       _printReceiptScreenData
           .bluetoothDevicesData.bluetoothDevicesDataValue.value = devices;
-      for (int i = 0;
-          i <
-              _printReceiptScreenData
-                  .bluetoothDevicesData.bluetoothDevicesDataValue.value.length;
-          i++) {
-        print(
-            "Name : ${_printReceiptScreenData.bluetoothDevicesData.bluetoothDevicesDataValue.value[i].name}, Address : ${_printReceiptScreenData.bluetoothDevicesData.bluetoothDevicesDataValue.value[i].address}, Type : ${_printReceiptScreenData.bluetoothDevicesData.bluetoothDevicesDataValue.value[i].type}");
+      for (int i = 0; i < _printReceiptScreenData.bluetoothDevicesData.bluetoothDevicesDataValue.value.length; i++) {
+        print("Name : ${_printReceiptScreenData.bluetoothDevicesData.bluetoothDevicesDataValue.value[i].name}, Address : ${_printReceiptScreenData.bluetoothDevicesData.bluetoothDevicesDataValue.value[i].address}, Type : ${_printReceiptScreenData.bluetoothDevicesData.bluetoothDevicesDataValue.value[i].type}");
       }
-      _printReceiptScreenData
-              .bluetoothDevicesData.allFoundDevicesSelectionStatusValue =
-          List.filled(
-              _printReceiptScreenData
-                  .bluetoothDevicesData.bluetoothDevicesDataValue.value.length,
-              false);
+      _printReceiptScreenData.bluetoothDevicesData.allFoundDevicesSelectionStatusValue =
+          List.filled(_printReceiptScreenData.bluetoothDevicesData.bluetoothDevicesDataValue.value.length, false);
     });
   }
 

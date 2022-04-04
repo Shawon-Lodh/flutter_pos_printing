@@ -29,7 +29,7 @@ class PrintReceiptScreenReceiveData extends StatelessWidget {
 
 class PrintReceiptScreen extends StatefulWidget {
   final receiveData;
-  PrintReceiptScreen({Key? key, this.receiveData}) : super(key: key);
+  const PrintReceiptScreen({Key? key, this.receiveData}) : super(key: key);
   @override
   _PrintReceiptScreenState createState() => _PrintReceiptScreenState();
 }
@@ -52,7 +52,8 @@ class _PrintReceiptScreenState extends State<PrintReceiptScreen>{
     );
     _printReceiptScreenPresenter = PrintReceiptScreenPresenter(context, _printReceiptScreenData!);
     _printReceiptScreenPresenter?.checkBluetoothAndLocationInStarting();
-    _printReceiptScreenPresenter!.listenBluetoothDevices();
+    // _printReceiptScreenPresenter?.listenBluetoothDevices();
+    super.initState();
   }
 
   @override
@@ -67,23 +68,17 @@ class _PrintReceiptScreenState extends State<PrintReceiptScreen>{
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
-        appBar: AppBar(title: const Text("Pos Printer Print Sample"),),
+        appBar: AppBar(backgroundColor: const Color(0xffc88719),title: const Text("Pos Printer Print Sample"),),
         body: ValueListenableBuilder(
           valueListenable: _printReceiptScreenData!.isBluetoothOnValue,
           builder: (context, bool bluetoothStatusValue, child) {
-            return ValueListenableBuilder(
-              valueListenable: _printReceiptScreenData!.isLocationOnValue,
-              builder: (context, bool locationStatusValue, child) {
-                return SingleChildScrollView(
-                  child: Expanded(
-                    child: Column(
-                      children: [
-                        !(bluetoothStatusValue && locationStatusValue) ? _getHardwareConnectionPanel(bluetoothStatusValue: bluetoothStatusValue, locationStatusValue: locationStatusValue) : _getAllBlueToothDevicesInformation(),
-                      ],
-                    ),
-                  ),
-                );
-              },
+            return Center(
+              child: ValueListenableBuilder(
+                valueListenable: _printReceiptScreenData!.isLocationOnValue,
+                builder: (context, bool locationStatusValue, child) {
+                  return !(bluetoothStatusValue && locationStatusValue) ? _getHardwareConnectionPanel(bluetoothStatusValue: bluetoothStatusValue, locationStatusValue: locationStatusValue) : _getAllBlueToothDevicesInformation();
+                },
+              ),
             );
           },
         ),
@@ -94,7 +89,7 @@ class _PrintReceiptScreenState extends State<PrintReceiptScreen>{
               visible: printButtonVisibleValue,
               child: FloatingActionButton(
                 child: Padding(
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   child: SvgPicture.asset(
                     'assets/images/ic_print_button.svg',
                     width: 64,
@@ -106,7 +101,7 @@ class _PrintReceiptScreenState extends State<PrintReceiptScreen>{
                   _printReceiptScreenPresenter!.sendDataToPrinterAndCompletePrinting();
                 },
                 backgroundColor: Colors.white,
-                shape: RoundedRectangleBorder(side: BorderSide(width: 5,color: Colors.redAccent),borderRadius: BorderRadius.circular(100)),
+                shape: RoundedRectangleBorder(side: const BorderSide(width: 5,color: Color(0xffc88719)),borderRadius: BorderRadius.circular(100)),
               ),
             );
           },
@@ -133,7 +128,7 @@ class _PrintReceiptScreenState extends State<PrintReceiptScreen>{
     return Visibility(
       visible: !(bluetoothStatusValue && locationStatusValue),
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 25),
+        padding: const EdgeInsets.symmetric(vertical: 25),
         child: Column(
           children: [
             _getHardwareConnectionPanelTitle(),
@@ -147,7 +142,7 @@ class _PrintReceiptScreenState extends State<PrintReceiptScreen>{
 
   Widget _getTutorialForTurnOnHardwareConnection(bool bluetoothStatusValue, bool locationStatusValue) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 40),
+      padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -186,7 +181,7 @@ class _PrintReceiptScreenState extends State<PrintReceiptScreen>{
     return Visibility(
       visible: !(_printReceiptScreenData!.isBluetoothOnValue.value && _printReceiptScreenData!.isLocationOnValue.value),
       child: Padding(
-        padding: EdgeInsets.only(top: 15, bottom: 25),
+        padding: const EdgeInsets.only(top: 15, bottom: 25),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -219,11 +214,11 @@ class _PrintReceiptScreenState extends State<PrintReceiptScreen>{
       required ValueNotifier<bool> buttonStatus,
       required Function(bool)? buttonStatusChangeFunction}) {
     return Container(
-      padding: EdgeInsets.only(top: 15, bottom: 10),
+      padding: const EdgeInsets.only(top: 15, bottom: 10),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
         border: Border.all(
-          color: Colors.redAccent,
+          color: const Color(0xffc88719),
         ),
       ),
       child: Column(
@@ -231,11 +226,11 @@ class _PrintReceiptScreenState extends State<PrintReceiptScreen>{
         children: [
           /// active dot circle
           Container(
-            margin: EdgeInsets.only(right: 15),
+            margin: const EdgeInsets.only(right: 15),
             width: 5,
             height: 5,
-            decoration: BoxDecoration(
-              color: Colors.redAccent,
+            decoration: const BoxDecoration(
+              color: Color(0xffc88719),
               shape: BoxShape.circle,
             ),
           ),
@@ -256,11 +251,11 @@ class _PrintReceiptScreenState extends State<PrintReceiptScreen>{
                       width: 24,
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 10),
+                      padding: const EdgeInsets.only(top: 10),
                       child: Text(
                         title,
                         style: const TextStyle(
-                            color: Colors.redAccent,
+                            color: Color(0xffc88719),
                             fontSize: 12,
                             fontFamily: 'Raleway',
                             fontWeight: FontWeight.bold),
@@ -271,7 +266,7 @@ class _PrintReceiptScreenState extends State<PrintReceiptScreen>{
                       child: Switch(
                         onChanged: buttonStatusChangeFunction,
                         value: buttonStatusValue,
-                        activeColor: Colors.redAccent,
+                        activeColor: const Color(0xffc88719),
                         activeTrackColor:
                         const Color(0xFFAAAAAA).withOpacity(0.5),
                         inactiveTrackColor:
@@ -308,83 +303,80 @@ class _PrintReceiptScreenState extends State<PrintReceiptScreen>{
           initialData: false,
           builder: (c, snapshot) {
             if (snapshot.data!) {
-              return Expanded(
-                child: Column(
-                  children: [
-                    Text(
-                      AppConstants.instance.searchingDevices,
-                      style: const TextStyle(
-                          color: Colors.redAccent,
-                          fontSize: 18,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      AppConstants.instance.waitingFewSeconds,
-                      style: const TextStyle(
-                          color: Color(0xffAAAAAA),
-                          fontSize: 16,
-                          fontFamily: 'Raleway',
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Expanded(child: RippleAnimation(
-                      color: Color(0xffAAAAAA),
-                      child: SvgPicture.asset('assets/images/ic_pos_printer.svg'),)),
-                  ],
-                ),
+              return Column(
+                children: [
+                  const SizedBox(height: 20),
+                  Text(
+                    AppConstants.instance.searchingDevices,
+                    style: const TextStyle(
+                        color: Color(0xffc88719),
+                        fontSize: 18,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    AppConstants.instance.waitingFewSeconds,
+                    style: const TextStyle(
+                        color: Color(0xffAAAAAA),
+                        fontSize: 16,
+                        fontFamily: 'Raleway',
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Expanded(child: RippleAnimation(
+                    color: const Color(0xffAAAAAA),
+                    child: SvgPicture.asset('assets/images/ic_pos_printer.svg'),)),
+                ],
               );
             } else {
-              return Expanded(
-                child: _printReceiptScreenData!.bluetoothDevicesData.bluetoothDevicesDataValue.value.isNotEmpty ? Column(
-                  children: [
-                    const SizedBox(height: 20),
-                    _getRetryButton(buttonText: AppConstants.instance.scanMore),
-                    Text(
-                      AppConstants.instance.totalFoundDevices + _printReceiptScreenData!.bluetoothDevicesData.bluetoothDevicesDataValue.value.length.toString(),
-                      style: const TextStyle(
-                          color: Colors.redAccent,
-                          fontSize: 18,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      AppConstants.instance.selectDevices,
-                      style: const TextStyle(
-                          color: Color(0xffAAAAAA),
-                          fontSize: 16,
-                          fontFamily: 'Raleway',
-                          fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 20),
-                    Expanded(
-                      child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: _printReceiptScreenData!.bluetoothDevicesData.bluetoothDevicesDataValue.value.length,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: _selectDeviceForPrint(index),
-                              child: _getBlDevicesDetailsCard(
-                                deviceName: _printReceiptScreenData!.bluetoothDevicesData.bluetoothDevicesDataValue.value[index].name.toString(),
-                                deviceAddress: _printReceiptScreenData!.bluetoothDevicesData.bluetoothDevicesDataValue.value[index].address.toString(),
-                                selected: _printReceiptScreenData!.bluetoothDevicesData.allFoundDevicesSelectionStatus![index],
-                              ),
-                            );
-                          }),
-                    ),
-                  ],
-                ) : Column(
-                  children: [
-                    Text(
-                      AppConstants.instance.noDevicesFound,
-                      style: const TextStyle(
-                          color: Colors.redAccent,
-                          fontSize: 16,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.bold),
-                    ),
-                    _getRetryButton(buttonText: AppConstants.instance.retry),
-                  ],
-                ),
+              return _printReceiptScreenData!.bluetoothDevicesData.bluetoothDevicesDataValue.value.isNotEmpty ? Column(
+                children: [
+                  const SizedBox(height: 20),
+                  _getRetryButton(buttonText: AppConstants.instance.scanMore),
+                  Text(
+                    AppConstants.instance.totalFoundDevices + _printReceiptScreenData!.bluetoothDevicesData.bluetoothDevicesDataValue.value.length.toString(),
+                    style: const TextStyle(
+                        color: Color(0xffc88719),
+                        fontSize: 18,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    AppConstants.instance.selectDevices,
+                    style: const TextStyle(
+                        color: Color(0xffAAAAAA),
+                        fontSize: 16,
+                        fontFamily: 'Raleway',
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 20),
+                  Expanded(
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: _printReceiptScreenData!.bluetoothDevicesData.bluetoothDevicesDataValue.value.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: _selectDeviceForPrint(index),
+                            child: _getBlDevicesDetailsCard(
+                              deviceName: _printReceiptScreenData!.bluetoothDevicesData.bluetoothDevicesDataValue.value[index].name.toString(),
+                              deviceAddress: _printReceiptScreenData!.bluetoothDevicesData.bluetoothDevicesDataValue.value[index].address.toString(),
+                              selected: _printReceiptScreenData!.bluetoothDevicesData.allFoundDevicesSelectionStatus![index],
+                            ),
+                          );
+                        }),
+                  ),
+                ],
+              ) : Column(
+                children: [
+                  Text(
+                    AppConstants.instance.noDevicesFound,
+                    style: const TextStyle(
+                        color: Color(0xffc88719),
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold),
+                  ),
+                  _getRetryButton(buttonText: AppConstants.instance.retry),
+                ],
               );
             }
           },
@@ -396,7 +388,7 @@ class _PrintReceiptScreenState extends State<PrintReceiptScreen>{
   Widget _getBlDevicesDetailsCard({String? deviceName,String? deviceAddress, bool selected = false}) {
     return Container(
       // constraints: BoxConstraints(minHeight: 0, maxHeight: 90.h),
-      padding: EdgeInsets.symmetric(vertical: 5,horizontal: 20),
+      padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 20),
       alignment: Alignment.center,
       child: Stack(
         alignment: AlignmentDirectional.bottomStart,
@@ -408,11 +400,11 @@ class _PrintReceiptScreenState extends State<PrintReceiptScreen>{
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
                 border: Border.all(
-                  color: selected ? Colors.redAccent : const Color(0xffAAAAAA),
+                  color: selected ? const Color(0xffc88719) : const Color(0xffAAAAAA),
                   width: 2,
                 ),
                 color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
                 boxShadow: [
                   BoxShadow(
                     color: const Color(0xffAAAAAA).withOpacity(0.25),
@@ -434,8 +426,8 @@ class _PrintReceiptScreenState extends State<PrintReceiptScreen>{
                         FittedBox(
                           child: Text(
                             deviceName ?? "",
-                            style: TextStyle(
-                                color: Colors.redAccent,
+                            style: const TextStyle(
+                                color: Color(0xffc88719),
                                 fontSize: 16,
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.bold),
@@ -446,7 +438,7 @@ class _PrintReceiptScreenState extends State<PrintReceiptScreen>{
                           child: Text(
                             (deviceAddress!= null) ? (AppConstants.instance.address + deviceAddress) : "",
                             style: const TextStyle(
-                                color: Colors.redAccent,
+                                color: Color(0xffc88719),
                                 fontSize: 12,
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.bold),
@@ -466,7 +458,7 @@ class _PrintReceiptScreenState extends State<PrintReceiptScreen>{
                         ),
                       ],
                     ),
-                    Visibility(visible: selected, child: FaIcon(FontAwesomeIcons.checkCircle,size: 32)),
+                    Visibility(visible: selected, child: const FaIcon(FontAwesomeIcons.checkCircle,size: 32)),
                   ],
                 ),
               ),
@@ -478,7 +470,7 @@ class _PrintReceiptScreenState extends State<PrintReceiptScreen>{
             bottom: 20,
             child: SvgPicture.asset(
               'assets/images/ic_pos_printer.svg',
-              color: Colors.redAccent,
+              color: const Color(0xffc88719),
               height: 80,
             ),
           ),
@@ -494,13 +486,13 @@ class _PrintReceiptScreenState extends State<PrintReceiptScreen>{
 
   Widget _getRetryButton({required String buttonText}) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 20),
+      padding: const EdgeInsets.symmetric(vertical: 20),
       child: OutlinedButton(
         onPressed: _printReceiptScreenPresenter!.retryButtonFunctionality,
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 75,vertical: 12),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(60),),
-          side: const BorderSide(width: 1, color: Colors.redAccent,style: BorderStyle.solid,),
+          side: const BorderSide(width: 1, color: Color(0xffc88719),style: BorderStyle.solid,),
         ),
         child: Text(
           buttonText,
@@ -508,7 +500,7 @@ class _PrintReceiptScreenState extends State<PrintReceiptScreen>{
             fontSize: 14,
             fontFamily: 'Raleway',
             fontWeight: FontWeight.bold,
-            color: Colors.redAccent,
+            color: Color(0xffc88719),
           ),
         ),
       ),

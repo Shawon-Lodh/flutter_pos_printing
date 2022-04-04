@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pos_printing/common/constants/app_routes.dart';
-import 'package:flutter_pos_printing/pages/HomePage/screen_homePage.dart';
+import 'package:flutter_pos_printing/pages/splashPage/screen_splash.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       locale: context.locale,
 
 
-      home: HomePageScreen(),
+      home: SplashPage(),
     );
   }
 }

@@ -42,8 +42,6 @@ class _ScreenPrintingOnPosMachineState extends State<ScreenPrintingOnPosMachine>
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   PrinterBluetoothManager? printerBluetoothManager;
   PrinterBluetooth? selectedPrinter;
-  String? tobaccoType;
-  String? tobaccoVariety;
   Uint8List? printImageData;
 
   @override
@@ -68,7 +66,7 @@ class _ScreenPrintingOnPosMachineState extends State<ScreenPrintingOnPosMachine>
       child: SafeArea(
         child: Scaffold(
           key: _scaffoldKey,
-          body: FutureBuilder<String>(
+          body: FutureBuilder(
             future: _createPrint(selectedPrinter!),
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
@@ -96,8 +94,8 @@ class _ScreenPrintingOnPosMachineState extends State<ScreenPrintingOnPosMachine>
                   );
                 case ConnectionState.done:
                   if (snapshot.hasError) {
-                    return Center(
-                      child: SingleChildScrollView(
+                    return SingleChildScrollView(
+                      child: Center(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: Column(
@@ -205,7 +203,7 @@ class _ScreenPrintingOnPosMachineState extends State<ScreenPrintingOnPosMachine>
     return bytes;
   }
 
-  Future<String> _createPrint(PrinterBluetooth printer) async {
+  _createPrint(PrinterBluetooth printer) async {
     printerBluetoothManager!.selectPrinter(selectedPrinter!);
 
     // TODO Don't forget to choose printer's paper
@@ -213,14 +211,15 @@ class _ScreenPrintingOnPosMachineState extends State<ScreenPrintingOnPosMachine>
 
     final profile = await CapabilityProfile.load();
 
-    // Final RECEIPT
-    final PosPrintResult res =
-    await printerBluetoothManager!.printTicket((await _createReceipt(paper, profile)));
-
-    // UIUtil.instance.showToast(context, res.msg);
-
-    return res.msg;
-
+    try{
+      // Final RECEIPT
+      final PosPrintResult res =
+      await printerBluetoothManager!.printTicket((await _createReceipt(paper, profile)));
+      print(res);
+    } catch (e) {
+      print(e);
+      // do stuff
+    }
   }
 
   /// backPress Dialogs
