@@ -106,17 +106,7 @@ class _HomePageScreenState extends State<HomePageScreen>{
 
                         const SizedBox(height: 5),
 
-                        LayoutBuilder(
-                          builder: (context, constraints) {
-                            return Dash(
-                                direction: Axis.horizontal,
-                                length: constraints.maxWidth,
-                                dashLength: 5,
-                                dashGap: 2,
-                                // dashThickness: 2,
-                                dashColor: Color(0xff424242));
-                          },
-                        ),
+                        _getDottedLine(),
 
 
                         Padding(
@@ -176,132 +166,7 @@ class _HomePageScreenState extends State<HomePageScreen>{
                           ),
                         ),
 
-
-                        LayoutBuilder(
-                          builder: (context, constraints) {
-                            return Dash(
-                                direction: Axis.horizontal,
-                                length: constraints.maxWidth,
-                                dashLength: 5,
-                                dashGap: 2,
-                                // dashThickness: 2,
-                                dashColor: Color(0xff424242));
-                          },
-                        ),
-
-
-                        // Text(
-                        //     "----------------------------------------------------------------------------------"),
-                        // Padding(
-                        //   padding: const EdgeInsets.only(bottom: 20.0),
-                        //   child: Row(
-                        //     mainAxisAlignment: MainAxisAlignment.center,
-                        //     children: [
-                        //       Text(
-                        //         "(  汉字 )",
-                        //         style: TextStyle(
-                        //             fontSize: 40, fontWeight: FontWeight.bold),
-                        //       ),
-                        //       SizedBox(
-                        //         width: 10,
-                        //       ),
-                        //       Text(
-                        //         "رقم الطلب",
-                        //         style: TextStyle(
-                        //             fontSize: 30, fontWeight: FontWeight.bold),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
-                        // SizedBox(
-                        //   height: 20,
-                        //   child: Text(
-                        //       "-------------------------------------------------------------------------------------"),
-                        // ),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //   crossAxisAlignment: CrossAxisAlignment.start,
-                        //   children: [
-                        //     Expanded(
-                        //       child: Center(
-                        //         child: Text(
-                        //           "التفاصيل",
-                        //           style: TextStyle(
-                        //               fontSize: 25,
-                        //               fontWeight: FontWeight.bold),
-                        //         ),
-                        //       ),
-                        //       flex: 6,
-                        //     ),
-                        //     Expanded(
-                        //       child: Center(
-                        //         child: Text(
-                        //           "السعر ",
-                        //           style: TextStyle(
-                        //               fontSize: 25,
-                        //               fontWeight: FontWeight.bold),
-                        //         ),
-                        //       ),
-                        //       flex: 2,
-                        //     ),
-                        //     Expanded(
-                        //       child: Center(
-                        //         child: Text(
-                        //           "العدد",
-                        //           style: TextStyle(
-                        //               fontSize: 25,
-                        //               fontWeight: FontWeight.bold),
-                        //         ),
-                        //       ),
-                        //       flex: 2,
-                        //     ),
-                        //   ],
-                        // ),
-                        // ListView.builder(
-                        //   scrollDirection: Axis.vertical,
-                        //   shrinkWrap: true,
-                        //   physics: ScrollPhysics(),
-                        //   itemCount: 1,
-                        //   itemBuilder: (context, index) {
-                        //     return Card(
-                        //       child: Row(
-                        //         mainAxisAlignment:
-                        //         MainAxisAlignment.spaceBetween,
-                        //         crossAxisAlignment: CrossAxisAlignment.start,
-                        //         children: [
-                        //           Expanded(
-                        //             child: Center(
-                        //               child: Text(
-                        //                 "臺灣",
-                        //                 style: TextStyle(fontSize: 25),
-                        //               ),
-                        //             ),
-                        //             flex: 6,
-                        //           ),
-                        //           Expanded(
-                        //             child: Center(
-                        //               child: Text(
-                        //                 "تجربة عيوني انتة ",
-                        //                 style: TextStyle(fontSize: 25),
-                        //               ),
-                        //             ),
-                        //             flex: 2,
-                        //           ),
-                        //           Expanded(
-                        //             child: Center(
-                        //               child: Text(
-                        //                 "Test My little pice of huny",
-                        //                 style: TextStyle(fontSize: 25),
-                        //               ),
-                        //             ),
-                        //             flex: 2,
-                        //           ),
-                        //         ],
-                        //       ),
-                        //     );
-                        //   },
-                        // ),
-                        // Text("----------------------------------------------------------------------------------"),
+                        _getDottedLine(),
 
                       ],
                     ),
@@ -313,6 +178,20 @@ class _HomePageScreenState extends State<HomePageScreen>{
           ),
         ),
       ),
+    );
+  }
+
+  Widget _getDottedLine() {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Dash(
+            direction: Axis.horizontal,
+            length: constraints.maxWidth,
+            dashLength: 5,
+            dashGap: 2,
+            // dashThickness: 2,
+            dashColor: Color(0xff424242));
+      },
     );
   }
 
